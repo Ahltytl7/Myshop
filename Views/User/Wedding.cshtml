@@ -1,0 +1,317 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "";
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cổng thông tin Quốc Gia</title>
+    <link href="~/css/wedding.css" rel="stylesheet" media="all">
+
+</head>
+
+<body>
+    <div class="header">
+        <img src="https://dichvucong.gov.vn/p/home/theme/img/header/logo.png" alt="">
+    </div>
+    <div class="container">
+        <div class="form_name">
+            <span class="icon"><ion-icon name="folder-open"></ion-icon></span>
+            <p style="text-decoration: underline;">Biểu mẫu giấy tờ</p>
+        </div>
+        <div class="form_action">
+            <div class="form_action_header">
+                <p>Tờ khai đăng ký kết hôn <i style="color: #F10123;">(Bản chính)</i></p>
+            </div>
+            <div class="form_action_container">
+                <div class="above">
+                    <h3 style="text-decoration: underline;">Người yêu cầu</h3><br>
+                    <select id="gender" onchange="showForm()">
+                        <option value="male">Người Chồng</option>
+                        <option value="female">Người Vợ</option>
+                    </select>
+                    <span id="inf">Thông tin người Chồng</span><br>
+                    <span class="line"></span>
+                </div>
+                <div class="center">
+                    <div class="one">
+                        <div class="one1">
+                            <label>Họ và tên <strong style="color: red;">(*)</strong></label>
+                            <input type="text" id="us"placeholder="Vd: Nguyễn Văn A">
+                            <p id="error-message" style="color: red;"></p>
+                        </div>
+                        <div class="one2">
+                            <label>Ngày Sinh</label>
+                            <input type="date" id="date">
+                        </div>
+                    </div>
+                    <div>
+                        <h3 style="text-decoration: underline;">Giấy tờ</h3>
+                    </div>
+                    <div class="two">
+                        <div class="two1">
+                            <label>Loại giấy tờ <strong style="color: red;">(*)</strong></label>
+                            <select id="type_cmnd">
+                                <option value="" disabled selected hidden style="color: #F10123;">--Chọn loại giấy tờ--
+                                </option>
+                                <option value="cmnd">Chứng minh nhân dân</option>
+                                <option value="cccd">Căn cước công dân</option>
+                            </select>
+                            <p id="error-messagetype" style="color: red;"></p>
+                            <!-- <input type="text" id="type_cmnd" name="type_cmnd" onchange="check()"> -->
+                        </div>
+                        <div class="two2">
+                            <label>Số giấy tờ <strong style="color: red;">(*)</strong></label>
+                            <input type="input" id="number_cmnd" name="number_cmnd">
+                            <p id="error-message1" style="color: red;"></p>
+                        </div>
+                    </div>
+                    <div class="three">
+                        <div class="three1">
+                            <label>Nơi cấp</label>
+                            <input type="input" id="place_cmnd" name="place_cmnd" onchange="check()">
+                            <!-- <input type="text" id="type_cmnd" name="type_cmnd" onchange="check()"> -->
+                        </div>
+                        <div class="three2">
+                            <label>Ngày cấp</label>
+                            <input type="date" id="date_cmnd" name="date_cmnd" onchange="check()">
+                        </div>
+                    </div>
+                    <div class="four">
+                        <div class="four1">
+                            <label>Quốc tịch</label>
+                            <select id="national">
+                                <option value="" disabled selected hidden>--Chưa chọn--</option>
+                                <option value="vn">Việt Nam</option>
+                                <option value="hq">Hàn Quốc</option>
+                                <option value="tq">Trung Quốc</option>
+                            </select>
+                        </div>
+                        <div class="four2">
+                            <label>Dân tộc</label>
+                            <select id="nation">
+                                <option value="" disabled selected hidden>--Chưa chọn--</option>
+                                <option class="vn" value="kinh">Kinh</option>
+                                <option class="vn" value="muong">Mường</option>
+                                <option class="vn" value="tay">Tày</option>
+                                <option class="vn" value="thai">Thái</option>
+                                <option class="vn" value="dao">Dao</option>
+                                <!-- Các tùy chọn dân tộc cho Hàn Quốc -->
+                                <option class="hq" value="korean">Hàn Quốc</option>
+                                <!-- Các tùy chọn dân tộc cho Trung Quốc -->
+                                <option class="tq" value="han">Hán</option>
+                                <option class="tq" value="hui">Hui</option>
+                                <option class="tq" value="choang">Choang</option>
+                                <option class="tq" value="dong">Dong</option>
+                                <option class="tq" value="uyghur">Uyghur</option>
+                            </select>
+                            <p id="nation-error" style="color: red;"></p>
+                        </div>
+                    </div>
+                    <div class="five">
+                        <label style="font-weight: 600;">Lần kết hôn <strong style="color: red;">(*)</strong></label>
+                        <input type="text" id="lan_kh" name="lan_kh">
+                        <p id="error-message2" style="color: red;"></p>
+                    </div>
+                    <div>
+                        <h3 style="text-decoration: underline;">Nơi cư trú</h3>
+                    </div>
+                    <div class="six">
+                        <div class="six1">
+                            <label>Quốc gia</label>
+                            <select id="national_city">
+                                <option value="" disabled selected hidden>--Chưa chọn--</option>
+                                <option value="vn">Việt Nam</option>
+                                <option value="hq">Hàn Quốc</option>
+                                <option value="tq">Trung Quốc</option>
+                            </select>
+                        </div>
+                        <div class="six2">
+                            <label>Tỉnh/Thành phố</label>
+                            <select id="province">
+                                <option value="" disabled selected hidden>--Chưa chọn--</option>
+                                <!-- Các tỉnh Việt Nam -->
+                                <option class="vn" value="hn">Hà Nội</option>
+                                <option class="vn" value="na">Nghệ An</option>
+                                <option class="vn" value="ht">Hà Tĩnh</option>
+                                <!-- Các tỉnh Hàn Quốc -->
+                                <option class="hq" value="seoul">Seoul</option>
+                                <option class="hq" value="busan">Busan</option>
+                                <!-- Các tỉnh Trung Quốc -->
+                                <option class="tq" value="backinh">Bắc Kinh</option>
+                                <option class="tq" value="thuonghai">Thượng Hải</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="seven">
+                        <div class="seven1">
+                            <label>Quận/Huyện</label>
+                            <select id="national_pro">
+                                <option value="" disabled selected hidden>--Chưa chọn--</option>
+                                <!-- Quận/Huyện Hà Nội -->
+                                <option class="hn" value="hk">Hoàn Kiếm</option>
+                                <option class="hn" value="cg">Cầu Giấy</option>
+                                <option class="hn" value="hd">Hà Đông</option>
+                                <!-- Quận/Huyện Nghệ An -->
+                                <option class="na" value="tc">Thanh Chương</option>
+                                <option class="na" value="dl">Đô Lương</option>
+                                <option class="na" value="yt">Yên Thành</option>
+                                <!-- Quận/Huyện Hà Tĩnh -->
+                                <option class="ht" value="dt">Đức Thọ</option>
+                                <option class="ht" value="hkk">Hương Khê</option>
+                                <option class="ht" value="cl">Can Lộc</option>
+                                <!-- Quận/Huyện Seoul -->
+                                <option class="seoul" value="gn">Gangnam</option>
+                                <option class="seoul" value="sp">Songpa-gu</option>
+                                <!-- Quận/Huyện Busan -->
+                                <option class="busan" value="seogu">Seo-gu</option>
+                                <option class="busan" value="donggu">Dong-gu</option>
+                                <!-- Quận/Huyện Bắc Kinh -->
+                                <option class="backinh" value="trieuduong">Triều Dương</option>
+                                <option class="backinh" value="daihung">Đại Hưng</option>
+                                <!-- Quận/Huyện Thượng Hải -->
+                                <option class="thuonghai" value="hoangpho">Hoàng Phố</option>
+                                <option class="thuonghai" value="tinhan">Tĩnh An</option>
+                            </select>
+                        </div>
+                        <div class="seven2">
+                            <label>Phường/Xã</label>
+                            <select id="province_local">
+                                <option value="" disabled selected hidden>--Chưa chọn--</option>
+                                <!-- Phường/Xã Hoàn Kiếm -->
+                                <option class="hk" value="hd">Hàng Đào</option>
+                                <option class="hk" value="hb">Hàng Bông</option>
+                                <option class="hk" value="hm">Hàng Mã</option>
+                                <!-- Phường/Xã Cầu Giấy -->
+                                <option class="cg" value="th">Trung Hoà</option>
+                                <option class="cg" value="nt">Nghĩa Tân</option>
+                                <option class="cg" value="md">Mai Dịch</option>
+                                <!-- Phường/Xã Hà Đông -->
+                                <option class="hd" value="dm">Đồng Mai</option>
+                                <option class="hd" value="dn">Dương Nội</option>
+                                <option class="hd" value="nt">Nguyễn Trãi</option>
+                                <!-- Phường/Xã Thanh Chương -->
+                                <option class="tc" value="td">Thanh Dương</option>
+                                <option class="tc" value="ty">Thanh yên</option>
+                                <option class="tc" value="tl">Thanh Lương</option>
+                                <!-- Phường/Xã Đô lương -->
+                                <option class="dl" value="bs">Bài Sơn</option>
+                                <option class="dl" value="gs">Giang Sơn</option>
+                                <option class="dl" value="ds">Đông Sơn</option>
+                                <!-- Phường/Xã Yên Thành -->
+                                <option class="yt" value="bt">Bảo Thành</option>
+                                <option class="yt" value="ht">Hoa Thành</option>
+                                <option class="yt" value="dt">Đại Thành</option>
+                                <!-- Phường/Xã Đức Thọ -->
+                                <option class="dt" value="dq">Đức Quang</option>
+                                <option class="dt" value="yh">Yên Hồ</option>
+                                <option class="dt" value="ty">Thái Yên</option>
+                                <!-- Phường/Xã Hương Khê -->
+                                <option class="hkk" value="pm">Phương Mỹ</option>
+                                <option class="hkk" value="hg">Hương Giang</option>
+                                <option class="hkk" value="ly">Lộc Yên</option>
+                                <!-- Phường/Xã Can Lộc -->
+                                <option class="cl" value="tl">Thiên Lộc</option>
+                                <option class="cl" value="kl">Kim Lộc</option>
+                                <option class="cl" value="gh">Gia Hanh</option>
+                                <!-- Phường/Xã GangNam -->
+                                <option class="gn" value="sinsa-dong">Sinsa-dong</option>
+                                <option class="gn" value="apgujeong-dong">Apgujeong-dong</option>
+                                <!-- Phường/Xã SongPa -->
+                                <option class="sp" value="seok">Seokchon </option>
+                                <option class="sp" value="daero"> Daero </option>
+                                <!-- Phường/Xã Seo-gu -->
+                                <option class="seogu" value="seok">Dongdaeshin 1-dong</option>
+                                <option class="seogu" value="daero">Dongdaeshin 2-dong </option>
+                                <!-- Phường/Xã Dong-gu -->
+                                <option class="donggu" value="chor1">Choryang 1-dong</option>
+                                <option class="donggu" value="chor2">Choryang 2-dong</option>
+                                <!-- Phường/Xã Triều Dương-->
+                                <option class="trieuduong" value="hgl">Hô Gia Lâu</option>
+                                <option class="trieuduong" value="trng">Triều Ngoại</option>
+                                <!-- Phường/Xã Đại Hưng -->
+                                <option class="daihung" value="hphg">Hưng Phong</option>
+                                <option class="daihung" value="tng">Thanh Nguyên</option>
+                                <!-- Phường/Xã Hoàng Phố -->
+                                <option class="hoangpho" value="ngth">Ngoại Than</option>
+                                <option class="hoangpho" value="duvien">Dư Viên</option>
+                                <!-- Phường/Xã Tĩnh An -->
+                                <option class="tinhan" value="thm">Thạch Môn</option>
+                                <option class="tinhan" value="hoatan">Hoà Tân</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="eight">
+                        <label>Số nhà, đường</label>
+                        <input type="text" id="number_street" name="number_street">
+                    </div>
+                    <div class="nine">
+                        <h2>Thông tin khác</h2>
+                        <div class="line2"></div>
+                    </div>
+                    <div class="ten">
+                        <div class="ten1">
+                            <label>Đã xác lập quan hệ hôn nhân trước ngày 03/01/1987</label>
+                            <select id="qhhn">
+                                <option value="" disabled selected hidden>--Chưa chọn--</option>
+                                <option value="co">Có</option>
+                                <option value="khong">Không</option>
+                            </select>
+                        </div>
+                        <div class="ten2">
+                            <label>Thời gian xác lập QHHN trước ngày 03/01/1987(nếu có)</label>
+                            <input type="date" id="time_wed1987">
+                        </div>
+                    </div>
+                    <div class="eleven">
+                        <div class="eleven1">
+                            <label>Cấp bản sao trích lục kết hôn</label>
+                            <select id="tlkh">
+                                <option value="" disabled selected hidden>--Chưa chọn--</option>
+                                <option value="co">Có</option>
+                                <option value="khong">Không</option>
+                            </select>
+                        </div>
+                        <div class="eleven2">
+                            <label>Số bản (1 bản sao tương ứng 8,000 đồng)</label>
+                            <input type="text" id="number_tl">
+                            <p id="error-message3" style="color: red;"></p>
+                        </div>
+                    </div>
+                    <div class="twelve">
+                        <div class="twelve1">
+                            <label for="">Email</label>
+                            <input type="email" id="email" placeholder="Nhập địa chỉ email của bạn" required>
+                        </div>
+                            <div class="twelve2">
+                                <label for="">Số điện thoại</label>
+                                <input type="text" id="phone" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                            </div>
+                    </div>
+                    <!-- <button type="button" id="generateButton">Tạo và Tải Tệp DOCX</button> -->
+
+                </div>
+                <div id="maleForm" style="display: none;">
+                </div>
+
+                <div id="femaleForm" style="display: none;">
+
+                </div>
+
+            </div>
+
+            <!-- <button id="exportPdfButton">Xuất PDF</button> -->
+        </div>
+    </div>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script> -->
+    <script src="D:\WEB-TVA\Myshop\JS\wedding.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>
