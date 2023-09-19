@@ -5,7 +5,7 @@ namespace Myshop.Controllers
 {
     public class ProductController : Controller
     {
-       
+        
         public IActionResult Index()
 
         {
@@ -23,6 +23,18 @@ namespace Myshop.Controllers
         public IActionResult Add()
         {
             return View();
+        }
+        public IActionResult AddAction(Product product) 
+        {
+            return RedirectToAction("Index");   
+        }
+        public IActionResult Edit(int id)
+        {
+            Product product = new Product();
+            product.Id = id;
+            product.Name = "Hàng hoá" + id;
+            product.Price = id*0.5;
+            return View(product);
         }
     }
 }
